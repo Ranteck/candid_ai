@@ -1,0 +1,20 @@
+# Environments
+.env
+.venv/
+env/
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Data y Output
+data/*
+!data/.gitkeep
+output/*
+!output/.gitkeep
+
+# IDE
+.vscode/
+.idea/

@@ -1,0 +1,60 @@
+cv_analyzer:
+  role: >
+    Analista Senior de Currículum Vitae
+  goal: >
+    Extraer y analizar información clave de CVs, identificando patrones, experiencia relevante y competencias
+  backstory: >
+    Eres un experto en análisis de perfiles profesionales con más de 10 años de experiencia en RRHH y talent acquisition.
+    Te destacas por tu capacidad de identificar tanto habilidades técnicas como soft skills a partir de la información proporcionada
+    en los CVs, y tienes un ojo especialmente agudo para detectar potencial y áreas de desarrollo.
+
+position_expert:
+  role: >
+    Especialista en Perfiles Laborales
+  goal: >
+    Analizar y desglosar requisitos de posiciones laborales, estableciendo criterios claros de evaluación
+  backstory: >
+    Eres un especialista con vasta experiencia en requirements engineering y diseño de perfiles laborales.
+    Tu expertise te permite identificar rápidamente los requisitos críticos de una posición y establecer
+    métricas claras para evaluar la idoneidad de los candidatos.
+
+profile_matcher:
+  role: >
+    Experto en Match Profesional
+  goal: >
+    Evaluar y cuantificar la compatibilidad entre perfiles profesionales y requisitos de posiciones
+  backstory: >
+    Eres un profesional especializado en evaluación de fit cultural y técnico, con amplia experiencia
+    en empresas de tecnología. Tu metodología única combina análisis cuantitativo con evaluación
+    cualitativa para determinar el grado de match entre candidatos y posiciones.
+
+cv_analysis_task:
+  description: >
+    Analizar detalladamente el CV proporcionado en {cv_file}.
+    Extraer información clave sobre: experiencia laboral, habilidades técnicas,
+    soft skills, formación académica, certificaciones y logros destacados.
+  expected_output: >
+    Un análisis estructurado del perfil que incluya:
+    - Lista de habilidades técnicas identificadas
+    - Evaluación de soft skills
+    - Resumen de experiencia relevante
+    - Análisis de formación y certificaciones
+    - Identificación de logros clave
+  agent: cv_analyzer
+
+linkedin_analysis_task:
+  description: >
+    Realizar web scraping del perfil de LinkedIn: {linkedin_url}
+    Analizar: actividad profesional, recomendaciones, endorsements,
+    publicaciones, participación en grupos relevantes y quality del networking.
+    Identificar patrones de desarrollo profesional y áreas de especialización.
+  expected_output: >
+    Un análisis comprehensivo del perfil de LinkedIn que incluya:
+    - Resumen de actividad profesional
+    - Análisis de recomendaciones y endorsements
+    - Evaluación de la red profesional
+    - Participación en grupos y comunidades relevantes
+    - Contenido y publicaciones destacadas
+    - Señales de expertise en áreas específicas
+    - Consistencia con la información del CV
+  agent: linkedin_scraper

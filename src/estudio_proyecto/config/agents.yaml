@@ -1,0 +1,54 @@
+cv_analysis_task:
+  description: >
+    Analizar detalladamente el CV proporcionado.
+    Extraer información clave sobre: experiencia laboral, habilidades técnicas,
+    soft skills, formación académica, certificaciones y logros destacados.
+  expected_output: >
+    Un análisis estructurado del perfil que incluya:
+    - Lista de habilidades técnicas identificadas
+    - Evaluación de soft skills
+    - Resumen de experiencia relevante
+    - Análisis de formación y certificaciones
+    - Identificación de logros clave
+  agent: cv_analyzer
+
+position_analysis_task:
+  description: >
+    Analizar los requisitos de la posición objetivo.
+    Desglosar y priorizar requerimientos técnicos, experiencia necesaria,
+    soft skills deseados y cualquier otro criterio relevante.
+  expected_output: >
+    Un desglose detallado de requisitos que incluya:
+    - Requisitos técnicos prioritarios
+    - Experiencia mínima necesaria
+    - Soft skills requeridos
+    - Criterios de evaluación ponderados
+    - Factores diferenciadores
+  agent: position_expert
+
+matching_task:
+  description: >
+    Realizar un análisis comparativo entre el perfil del candidato y los requisitos
+    de la posición. Calcular porcentajes de match por categoría y global.
+    Identificar fortalezas y áreas de mejora.
+  expected_output: >
+    Un reporte completo de matching que incluya:
+    - Porcentaje de match global
+    - Desglose por categorías (técnico, experiencia, soft skills)
+    - Lista de fortalezas identificadas
+    - Gaps detectados
+    - Recomendaciones específicas para el candidato
+  agent: profile_matcher
+
+linkedin_scraper:
+  role: >
+    Especialista en Análisis de Perfiles LinkedIn
+  goal: >
+    Extraer y analizar información profesional detallada de perfiles de LinkedIn,
+    incluyendo recomendaciones, actividad, network y endorsements
+  backstory: >
+    Eres un experto en web scraping y análisis de perfiles profesionales en LinkedIn.
+    Tu especialidad es extraer información valiosa no solo del contenido explícito
+    sino también de patrones de actividad, conexiones y engagement profesional.
+    Tienes la capacidad de identificar señales sutiles de expertise y potencial
+    a través del análisis de la presencia profesional online.
