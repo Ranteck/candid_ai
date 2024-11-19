@@ -1,33 +1,3 @@
-cv_analyzer:
-  role: >
-    Analista Senior de Currículum Vitae
-  goal: >
-    Extraer y analizar información clave de CVs, identificando patrones, experiencia relevante y competencias
-  backstory: >
-    Eres un experto en análisis de perfiles profesionales con más de 10 años de experiencia en RRHH y talent acquisition.
-    Te destacas por tu capacidad de identificar tanto habilidades técnicas como soft skills a partir de la información proporcionada
-    en los CVs, y tienes un ojo especialmente agudo para detectar potencial y áreas de desarrollo.
-
-position_expert:
-  role: >
-    Especialista en Perfiles Laborales
-  goal: >
-    Analizar y desglosar requisitos de posiciones laborales, estableciendo criterios claros de evaluación
-  backstory: >
-    Eres un especialista con vasta experiencia en requirements engineering y diseño de perfiles laborales.
-    Tu expertise te permite identificar rápidamente los requisitos críticos de una posición y establecer
-    métricas claras para evaluar la idoneidad de los candidatos.
-
-profile_matcher:
-  role: >
-    Experto en Match Profesional
-  goal: >
-    Evaluar y cuantificar la compatibilidad entre perfiles profesionales y requisitos de posiciones
-  backstory: >
-    Eres un profesional especializado en evaluación de fit cultural y técnico, con amplia experiencia
-    en empresas de tecnología. Tu metodología única combina análisis cuantitativo con evaluación
-    cualitativa para determinar el grado de match entre candidatos y posiciones.
-
 cv_analysis_task:
   description: >
     Analizar detalladamente el CV proporcionado en {cv_file}.
@@ -41,6 +11,20 @@ cv_analysis_task:
     - Análisis de formación y certificaciones
     - Identificación de logros clave
   agent: cv_analyzer
+
+position_analysis_task:
+  description: >
+    Analizar los requisitos de la posición objetivo en {job_description}.
+    Desglosar y priorizar requerimientos técnicos, experiencia necesaria,
+    soft skills deseados y cualquier otro criterio relevante.
+  expected_output: >
+    Un desglose detallado de requisitos que incluya:
+    - Requisitos técnicos prioritarios
+    - Experiencia mínima necesaria
+    - Soft skills requeridos
+    - Criterios de evaluación ponderados
+    - Factores diferenciadores
+  agent: position_expert
 
 linkedin_analysis_task:
   description: >
@@ -58,3 +42,17 @@ linkedin_analysis_task:
     - Señales de expertise en áreas específicas
     - Consistencia con la información del CV
   agent: linkedin_scraper
+
+matching_task:
+  description: >
+    Realizar un análisis comparativo entre el perfil del candidato y los requisitos
+    de la posición. Calcular porcentajes de match por categoría y global.
+    Identificar fortalezas y áreas de mejora.
+  expected_output: >
+    Un reporte completo de matching que incluya:
+    - Porcentaje de match global
+    - Desglose por categorías (técnico, experiencia, soft skills)
+    - Lista de fortalezas identificadas
+    - Gaps detectados
+    - Recomendaciones específicas para el candidato
+  agent: profile_matcher
