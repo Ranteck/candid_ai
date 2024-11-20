@@ -10,6 +10,10 @@ cv_analysis_task:
     - Resumen de experiencia relevante
     - Análisis de formación y certificaciones
     - Identificación de logros clave
+    Si no puedes acceder al CV, indica explícitamente:
+    1. El error encontrado
+    2. Qué información no está disponible
+    3. Qué pasos adicionales se necesitan
   agent: cv_analyzer
 
 position_analysis_task:

@@ -12,9 +12,9 @@ def run():
     Run the crew.
     """
     inputs = {
-        'cv_file': './data/cv.pdf',  # Ruta al archivo CV
-        'linkedin_url': 'https://www.linkedin.com/in/denis-hugo-perafan-b0210567/',  # URL del perfil
-        'job_description': './data/job_description.pdf'  # Descripción del puesto
+        'cv_file': './data/cv.pdf',
+        'linkedin_url': 'https://www.linkedin.com/in/denis-hugo-perafan-b0210567/',
+        'job_description': './data/job_description.txt'
     }
     EstudioProyectoCrew().crew().kickoff(inputs=inputs)
 
@@ -24,7 +24,9 @@ def train():
     Train the crew for a given number of iterations.
     """
     inputs = {
-        "topic": "AI LLMs"
+        'cv_file': './data/cv.pdf',
+        'linkedin_url': 'https://www.linkedin.com/in/denis-hugo-perafan-b0210567/',
+        'job_description': './data/job_description.txt'
     }
     try:
         EstudioProyectoCrew().crew().train(n_iterations=int(sys.argv[1]), filename=sys.argv[2], inputs=inputs)
@@ -47,7 +49,9 @@ def test():
     Test the crew execution and returns the results.
     """
     inputs = {
-        "topic": "AI LLMs"
+        'cv_file': './data/cv.pdf',
+        'linkedin_url': 'https://www.linkedin.com/in/denis-hugo-perafan-b0210567/',
+        'job_description': './data/job_description.txt'
     }
     try:
         EstudioProyectoCrew().crew().test(n_iterations=int(sys.argv[1]), openai_model_name=sys.argv[2], inputs=inputs)
