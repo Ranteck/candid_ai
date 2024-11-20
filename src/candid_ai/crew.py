@@ -5,7 +5,7 @@ from crewai.project import CrewBase, agent, crew, task
 from crewai_tools import FileReadTool, SerperDevTool, PDFSearchTool
 
 @CrewBase
-class EstudioProyectoCrew():
+class CandidAICrew():
 	"""Crew para análisis y matching de perfiles profesionales"""
 
 	def __init__(self):

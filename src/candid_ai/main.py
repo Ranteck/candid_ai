@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import sys
-from estudio_proyecto.crew import EstudioProyectoCrew
+
+from candid_ai.crew import CandidAICrew
 
 # This main file is intended to be a way for you to run your
 # crew locally, so refrain from adding unnecessary logic into this file.
@@ -16,7 +17,7 @@ def run():
         'linkedin_url': 'https://www.linkedin.com/in/denis-hugo-perafan-b0210567/',
         'job_description': './data/job_description.txt'
     }
-    EstudioProyectoCrew().crew().kickoff(inputs=inputs)
+    CandidAICrew().crew().kickoff(inputs=inputs)
 
 
 def train():
@@ -29,7 +30,7 @@ def train():
         'job_description': './data/job_description.txt'
     }
     try:
-        EstudioProyectoCrew().crew().train(n_iterations=int(sys.argv[1]), filename=sys.argv[2], inputs=inputs)
+        CandidAICrew().crew().train(n_iterations=int(sys.argv[1]), filename=sys.argv[2], inputs=inputs)
 
     except Exception as e:
         raise Exception(f"An error occurred while training the crew: {e}")
@@ -39,7 +40,7 @@ def replay():
     Replay the crew execution from a specific task.
     """
     try:
-        EstudioProyectoCrew().crew().replay(task_id=sys.argv[1])
+        CandidAICrew().crew().replay(task_id=sys.argv[1])
 
     except Exception as e:
         raise Exception(f"An error occurred while replaying the crew: {e}")
@@ -54,7 +55,7 @@ def test():
         'job_description': './data/job_description.txt'
     }
     try:
-        EstudioProyectoCrew().crew().test(n_iterations=int(sys.argv[1]), openai_model_name=sys.argv[2], inputs=inputs)
+        CandidAICrew().crew().test(n_iterations=int(sys.argv[1]), openai_model_name=sys.argv[2], inputs=inputs)
 
     except Exception as e:
         raise Exception(f"An error occurred while replaying the crew: {e}")

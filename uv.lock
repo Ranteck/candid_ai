@@ -290,6 +290,17 @@ wheels = [
 ]
 
 [[package]]
+name = "candid-ai"
+version = "0.1.0"
+source = { editable = "." }
+dependencies = [
+    { name = "crewai", extra = ["tools"] },
+]
+
+[package.metadata]
+requires-dist = [{ name = "crewai", extras = ["tools"], specifier = ">=0.76.9,<1.0.0" }]
+
+[[package]]
 name = "certifi"
 version = "2024.8.30"
 source = { registry = "https://pypi.org/simple" }
@@ -761,17 +772,6 @@ sdist = { url = "https://files.pythonhosted.org/packages/6c/ea/eedb6016719f94fe4
 wheels = [
     { url = "https://files.pythonhosted.org/packages/52/82/3d0355c22bc68cfbb8fbcf670da4c01b31bd7eb516974a08cf7533e89887/embedchain-0.1.125-py3-none-any.whl", hash = "sha256:f87b49732dc192c6b61221830f29e59cf2aff26d8f5d69df81f6f6cf482715c2", size = 211367 },
 ]
-
-[[package]]
-name = "estudio-proyecto"
-version = "0.1.0"
-source = { editable = "." }
-dependencies = [
-    { name = "crewai", extra = ["tools"] },
-]
-
-[package.metadata]
-requires-dist = [{ name = "crewai", extras = ["tools"], specifier = ">=0.76.9,<1.0.0" }]
 
 [[package]]
 name = "exceptiongroup"
