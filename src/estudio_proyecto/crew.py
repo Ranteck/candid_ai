@@ -1,3 +1,5 @@
+import os
+import yaml
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from crewai_tools import FileReadTool, SerperDevTool, PDFSearchTool
@@ -6,14 +8,39 @@ from crewai_tools import FileReadTool, SerperDevTool, PDFSearchTool
 class EstudioProyectoCrew():
 	"""Crew para análisis y matching de perfiles profesionales"""
 
+	def __init__(self):
+		try:
+			config_path = os.path.join(os.path.dirname(__file__), 'config')
+			
+			# Verificar que el directorio existe
+			if not os.path.exists(config_path):
+				raise FileNotFoundError(f"Directory not found: {config_path}")
+			
+			# Cargar configuraciones
+			agents_path = os.path.join(config_path, 'agents.yaml')
+			tasks_path = os.path.join(config_path, 'tasks.yaml')
+			
+			for path in [agents_path, tasks_path]:
+				if not os.path.exists(path):
+					raise FileNotFoundError(f"Configuration file not found: {path}")
+			
+			with open(agents_path, 'r', encoding='utf-8') as f:
+				self.agents_config = yaml.safe_load(f)
+				
+			with open(tasks_path, 'r', encoding='utf-8') as f:
+				self.tasks_config = yaml.safe_load(f)
+				
+		except Exception as e:
+			raise Exception(f"Error loading configurations: {str(e)}")
+
 	@agent
 	def cv_analyzer(self) -> Agent:
 		return Agent(
 			config=self.agents_config['cv_analyzer'],
 			verbose=True,
 			tools=[
-				PDFSearchTool(pdf='./data/cv.pdf', encoding='utf-8'),
-				FileReadTool(root_dir='./data/cv.pdf', encoding='utf-8')
+				PDFSearchTool(root_dir='./data/cv.pdf', mode='rb'),
+				#FileReadTool(root_dir='./data/cv.pdf', mode='rb')
 			]
 		)
 
