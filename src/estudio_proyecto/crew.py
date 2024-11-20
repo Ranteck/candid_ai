@@ -1,13 +1,6 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
-from crewai_tools import (
-    FileReadTool,          # Para leer CVs en diferentes formatos
-    SerperDevTool,         # Para búsquedas generales
-    WebsiteSearchTool,     # Para análisis de sitios web específicos
-    TXTSearchTool,         # Para búsqueda en TXT
-    PDFSearchTool,         # Para búsqueda en PDF
-    DOCXSearchTool,        # Para búsqueda en DOCX
-)
+from crewai_tools import FileReadTool, SerperDevTool, PDFSearchTool
 
 @CrewBase
 class EstudioProyectoCrew():
@@ -19,8 +12,8 @@ class EstudioProyectoCrew():
 			config=self.agents_config['cv_analyzer'],
 			verbose=True,
 			tools=[
-				PDFSearchTool(),
-				FileReadTool(root_dir='./data')
+				PDFSearchTool(pdf='./data/cv.pdf', encoding='utf-8'),
+				FileReadTool(root_dir='./data/cv.pdf', encoding='utf-8')
 			]
 		)
 
@@ -29,10 +22,7 @@ class EstudioProyectoCrew():
 		return Agent(
 			config=self.agents_config['position_expert'],
 			verbose=True,
-			tools=[
-				FileReadTool(root_dir='./data'),
-				SerperDevTool()
-			]
+			tools=[FileReadTool(root_dir='./data'), SerperDevTool()]
 		)
 
 	@agent
@@ -48,50 +38,24 @@ class EstudioProyectoCrew():
 		return Agent(
 			config=self.agents_config['linkedin_scraper'],
 			verbose=True,
-			tools=[
-				FileReadTool(root_dir='./data'),
-				SerperDevTool()
-			]
+			tools=[FileReadTool(root_dir='./data'), SerperDevTool()]
 		)
 
 	@task
 	def cv_analysis_task(self) -> Task:
-		return Task(
-			config=self.tasks_config['cv_analysis_task']
-		)
+		return Task(config=self.tasks_config['cv_analysis_task'])
 
 	@task
 	def linkedin_analysis_task(self) -> Task:
-		return Task(
-			config=self.tasks_config['linkedin_analysis_task'],
-			context=[self.cv_analysis_task()]
-		)
+		return Task(config=self.tasks_config['linkedin_analysis_task'])
 
 	@task
 	def position_analysis_task(self) -> Task:
-		return Task(
-			config=self.tasks_config['position_analysis_task']
-		)
+		return Task(config=self.tasks_config['position_analysis_task'])
 
 	@task
 	def matching_task(self) -> Task:
-		return Task(
-			config=self.tasks_config['matching_task'],
-			context=[
-				self.cv_analysis_task(),
-				self.linkedin_analysis_task(),
-				self.position_analysis_task()
-			],
-			output_file='./output/matching_report.md',
-			expected_output="""
-			El reporte debe:
-			1. Indicar explícitamente qué información no pudo verificarse
-			2. Calcular porcentajes solo con datos confirmados
-			3. Separar claramente hechos verificados vs información no disponible
-			4. Incluir disclaimers sobre limitaciones del análisis
-			5. Sugerir pasos adicionales para obtener información faltante
-			"""
-		)
+		return Task(config=self.tasks_config['matching_task'])
 
 	@crew
 	def crew(self) -> Crew:

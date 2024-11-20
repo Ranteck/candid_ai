@@ -5,16 +5,36 @@ cv_analysis_task:
     soft skills, formación académica, certificaciones y logros destacados.
   expected_output: >
     Un análisis estructurado del perfil que incluya:
-    - Lista de habilidades técnicas identificadas
-    - Evaluación de soft skills
-    - Resumen de experiencia relevante
-    - Análisis de formación y certificaciones
-    - Identificación de logros clave
+    1. Lista de habilidades técnicas identificadas
+    2. Evaluación de soft skills
+    3. Resumen de experiencia relevante
+    4. Análisis de formación y certificaciones
+    5. Identificación de logros clave
     Si no puedes acceder al CV, indica explícitamente:
     1. El error encontrado
     2. Qué información no está disponible
     3. Qué pasos adicionales se necesitan
   agent: cv_analyzer
+  output_file: './output/cv_analysis.md'
+
+linkedin_analysis_task:
+  description: >
+    Realizar web scraping del perfil de LinkedIn: {linkedin_url}
+    Analizar: actividad profesional, recomendaciones, endorsements,
+    publicaciones, participación en grupos relevantes y quality del networking.
+  expected_output: >
+    Un análisis comprehensivo del perfil de LinkedIn que incluya:
+    1. Resumen de actividad profesional
+    2. Análisis de recomendaciones y endorsements
+    3. Evaluación de la red profesional
+    4. Participación en grupos relevantes
+    5. Contenido y publicaciones destacadas
+    6. Señales de expertise en áreas específicas
+    7. Consistencia con la información del CV
+  agent: linkedin_scraper
+  context:
+    - cv_analysis_task
+  output_file: './output/linkedin_analysis.md'
 
 position_analysis_task:
   description: >
@@ -23,40 +43,34 @@ position_analysis_task:
     soft skills deseados y cualquier otro criterio relevante.
   expected_output: >
     Un desglose detallado de requisitos que incluya:
-    - Requisitos técnicos prioritarios
-    - Experiencia mínima necesaria
-    - Soft skills requeridos
-    - Criterios de evaluación ponderados
-    - Factores diferenciadores
+    1. Requisitos técnicos prioritarios
+    2. Experiencia mínima necesaria
+    3. Soft skills requeridos
+    4. Criterios de evaluación ponderados
+    5. Factores diferenciadores
   agent: position_expert
-
-linkedin_analysis_task:
-  description: >
-    Realizar web scraping del perfil de LinkedIn: {linkedin_url}
-    Analizar: actividad profesional, recomendaciones, endorsements,
-    publicaciones, participación en grupos relevantes y quality del networking.
-    Identificar patrones de desarrollo profesional y áreas de especialización.
-  expected_output: >
-    Un análisis comprehensivo del perfil de LinkedIn que incluya:
-    - Resumen de actividad profesional
-    - Análisis de recomendaciones y endorsements
-    - Evaluación de la red profesional
-    - Participación en grupos y comunidades relevantes
-    - Contenido y publicaciones destacadas
-    - Señales de expertise en áreas específicas
-    - Consistencia con la información del CV
-  agent: linkedin_scraper
+  output_file: './output/position_analysis.md'
 
 matching_task:
   description: >
     Realizar un análisis comparativo entre el perfil del candidato y los requisitos
     de la posición. Calcular porcentajes de match por categoría y global.
-    Identificar fortalezas y áreas de mejora.
   expected_output: >
     Un reporte completo de matching que incluya:
-    - Porcentaje de match global
-    - Desglose por categorías (técnico, experiencia, soft skills)
-    - Lista de fortalezas identificadas
-    - Gaps detectados
-    - Recomendaciones específicas para el candidato
+    1. Porcentaje de match global
+    2. Desglose por categorías (técnico, experiencia, soft skills)
+    3. Lista de fortalezas identificadas
+    4. Gaps detectados
+    5. Recomendaciones específicas
+    El reporte debe:
+    1. Indicar explícitamente qué información no pudo verificarse
+    2. Calcular porcentajes solo con datos confirmados
+    3. Separar claramente hechos verificados vs información no disponible
+    4. Incluir disclaimers sobre limitaciones del análisis
+    5. Sugerir pasos adicionales para obtener información faltante
   agent: profile_matcher
+  context:
+    - cv_analysis_task
+    - linkedin_analysis_task
+    - position_analysis_task
+  output_file: './output/matching_report.md'
