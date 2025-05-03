@@ -14,7 +14,7 @@ def run():
     """
     inputs = {
         'cv_file': './data/cv.pdf',
-        'linkedin_url': 'https://www.linkedin.com/in/denis-hugo-perafan-b0210567/',
+        'linkedin_url': 'https://www.linkedin.com/URL_PERFIL/',
         'job_description': './data/job_description.txt'
     }
     CandidAICrew().crew().kickoff(inputs=inputs)
@@ -26,7 +26,7 @@ def train():
     """
     inputs = {
         'cv_file': './data/cv.pdf',
-        'linkedin_url': 'https://www.linkedin.com/in/denis-hugo-perafan-b0210567/',
+        'linkedin_url': 'https://www.linkedin.com/URL_PERFIL',
         'job_description': './data/job_description.txt'
     }
     try:
@@ -51,7 +51,7 @@ def test():
     """
     inputs = {
         'cv_file': './data/cv.pdf',
-        'linkedin_url': 'https://www.linkedin.com/in/denis-hugo-perafan-b0210567/',
+        'linkedin_url': 'https://www.linkedin.com/URL_PERFIL',
         'job_description': './data/job_description.txt'
     }
     try:
